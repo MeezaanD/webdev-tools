@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Website Status Checker</title>
+  <style>
+    /* Reset some basic elements */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f7fa;
+      color: #333;
+      padding: 2rem;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+    main {
+      max-width: 500px;
+      width: 100%;
+      background: #fff;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    h1 {
+      font-weight: 700;
+      font-size: 1.8rem;
+      margin-bottom: 0.25rem;
+      color: #222;
+      text-align: center;
+    }
+    p {
+      color: #555;
+      font-size: 1rem;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+    }
+    .controls {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    button {
+      background-color: #0078d7;
+      color: white;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0, 120, 215, 0.4);
+    }
+    button:disabled {
+      background-color: #a0c4ff;
+      cursor: default;
+      box-shadow: none;
+    }
+    button:hover:not(:disabled) {
+      background-color: #005ea3;
+    }
+    #sites {
+      border-top: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 2px #eee;
+      background: #fafafa;
+    }
+    .site {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid #eee;
+      font-size: 1rem;
+      transition: background-color 0.2s ease;
+    }
+    .site:last-child {
+      border-bottom: none;
+    }
+    .site:hover {
+      background-color: #e9f1fc;
+    }
+    .up {
+      color: #2d8a2d;
+      font-weight: 600;
+    }
+    .down {
+      color: #d93025;
+      font-weight: 600;
+    }
+    em {
+      color: #999;
+      display: block;
+      padding: 1rem;
+      font-style: italic;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Website Status Checker</h1>
+    <p>Shows the configured sites (from <code>.env</code>) and lets you run a live check.</p>
+
+    <div class="controls">
+      <button id="refresh">Check now</button>
+    </div>
+
+    <div id="sites">Loading…</div>
+  </main>
+
+  <script>
+    async function loadSites() {
+      const res = await fetch('/api/sites');
+      const sites = await res.json();
+      const container = document.getElementById('sites');
+      if (!sites || sites.length === 0) {
+        container.innerHTML = '<em>No sites configured in .env</em>';
+        return;
+      }
+      container.innerHTML = sites.map(s => `<div class="site"><div>${s}</div><div id="st-${encodeURIComponent(s)}">—</div></div>`).join('');
+    }
+
+    async function checkNow() {
+      const res = await fetch('/api/check');
+      const results = await res.json();
+      for (const r of results) {
+        const el = document.getElementById('st-' + encodeURIComponent(r.site));
+        if (el) {
+          el.textContent = r.status;
+          el.className = r.status.startsWith('UP') ? 'up' : 'down';
+        }
+      }
+    }
+
+    document.getElementById('refresh').addEventListener('click', async () => {
+      const btn = document.getElementById('refresh');
+      btn.disabled = true;
+      await checkNow();
+      setTimeout(() => btn.disabled = false, 1000);
+    });
+
+    // initial load
+    loadSites().then(checkNow).catch(err => {
+      document.getElementById('sites').innerHTML = '<em>Error loading sites</em>';
+      console.error(err);
+    });
+  </script>
+</body>
+</html>
