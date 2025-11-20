@@ -9,7 +9,7 @@ A simple project starter that gives every new project:
 ✔ EditorConfig  
 ✔ VS Code + Cursor settings  
 
-Works on **WSL Ubuntu, Linux, macOS, VS Code, and Cursor**.
+Works on **Windows Git Bash, WSL Ubuntu, Linux, macOS, VS Code, and Cursor**.
 
 ---
 
@@ -37,7 +37,7 @@ chmod +x newproject.sh
 Add this to your `~/.bashrc` or `~/.zshrc`:
 
 ```bash
-alias newproject="~/dev-project-template/newproject.sh"
+alias newproject="/path/to/dev-project-template/newproject.sh"
 ```
 
 Reload your terminal:
@@ -46,47 +46,33 @@ Reload your terminal:
 source ~/.bashrc
 ```
 
+Now you can run `newproject <project-name>` from anywhere.
+
 ---
 
 # Usage
 
-Create a new project instantly:
+The **new project will be created in the directory where you run the script**.
 
 ```bash
-newproject myapp
+cd /c/dev/webdev-tools
+./dev-project-template/newproject.sh keyboard-history
 ```
 
-It appears here:
+Output:
 
 ```
-~/dev/projects/myapp
+Project 'keyboard-history' created successfully!
+➡ Location: /c/dev/webdev-tools/keyboard-history
 ```
-
-With automatic files included:
-
-```
-.editorconfig
-.prettierrc
-.vscode/settings.json
-```
-
-Ready to code with tabs → arrows → format-on-save.
 
 ---
 
-# Example
+## Notes
 
-```bash
-newproject keepittogether
-code ~/dev/projects/keepittogether
-```
-
-Open it in:
-
-- VS Code  
-- Cursor  
-
-Both will automatically apply the formatting rules.
+- Make sure the `template/` folder exists inside the script folder.  
+- If a folder with the same project name already exists, the script will **not overwrite it**.  
+- Works in **VS Code** and **Cursor**, preserving tabs, arrows, and formatting rules.  
 
 ---
 
@@ -116,13 +102,12 @@ Every new project will include your changes.
 
 ---
 
-# Contribute
+# ❤️ Contribute
 
-Feel free to fork, remix, or add your own customizations.
+Fork and remix the template however you like.
 
 ---
 
-# Enjoy coding with clean, consistent, beautiful formatting
+# 🔥 Enjoy coding with clean, consistent, beautiful formatting
 
 Tabs. Arrows. Auto-format. Zero setup. Every time.
-
