@@ -102,12 +102,12 @@ Every new project will include your changes.
 
 ---
 
-# ❤️ Contribute
+# Contribute
 
 Fork and remix the template however you like.
 
 ---
 
-# 🔥 Enjoy coding with clean, consistent, beautiful formatting
+# Enjoy coding with clean, consistent, beautiful formatting
 
 Tabs. Arrows. Auto-format. Zero setup. Every time.
