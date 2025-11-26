@@ -1,0 +1,32 @@
+.sidebar {
+  min-height: 100vh;
+  border-right: 1px solid #dee2e6;
+}
+
+.content-area {
+  padding: 20px;
+}
+
+.card {
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.link-item, .note-item {
+  border-left: 4px solid #007bff;
+  padding-left: 15px;
+}
+
+.note-item {
+  border-left-color: #28a745;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+}
+
+.quick-actions .btn {
+  margin: 2px;
+}
