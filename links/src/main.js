@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import './style.css';
 
 document.querySelector('#app').innerHTML = `
@@ -214,7 +215,7 @@ class Dashboard {
             <div class="text-muted small mt-1">Added: ${link.createdAt}</div>
           </div>
           <button class="btn btn-outline-danger btn-sm ms-2 delete-link" data-id="${link.id}">
-            Delete
+            <i class="bi bi-trash"></i>
           </button>
         </div>
       </div>
@@ -283,7 +284,7 @@ class Dashboard {
             <div class="text-muted small">Created: ${note.createdAt}</div>
           </div>
           <button class="btn btn-outline-danger btn-sm ms-2 delete-note" data-id="${note.id}">
-            Delete
+            <i class="bi bi-trash"></i>
           </button>
         </div>
       </div>
