@@ -1,10 +1,19 @@
-Website Status Checker
+# Website Status Checker
 
 Small utility to check whether a list of websites is up. The project contains:
 
-- `app.py` — command-line checker that reads `URLS` from `.env` and logs results to `uptime_log.txt`.
-- `web.py` — optional lightweight Flask frontend that shows configured sites and runs live checks.
-- `.env.example` — example environment file (copy to `.env` and edit).
+- `app.py` — command-line checker that reads `URLS` from `.env` and logs results to `uptime_log.txt`.  
+- `web.py` — optional lightweight Flask frontend that shows configured sites and runs live checks.  
+- `.env.example` — example environment file (copy to `.env` and edit).  
+
+---
+
+## Quick Setup (Linux/macOS / Bash)
+
+You can set everything up in **one command**:
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && chmod +x app.py web.py
 
 ## Setup (PowerShell)
 
